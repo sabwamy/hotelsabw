@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('rooms', RoomController::class);
+    Route::resource('reservations', RoomController::class);
+
 });
 
 Auth::routes();
