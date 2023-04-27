@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('reservation_date');
             $table->timestamp('date_in');
             $table->timestamp('date_out');
-            $table->int('date_range');
+            $table->integer('date_range');
             $table->timestamps();
 
             $table->index('customer_id');

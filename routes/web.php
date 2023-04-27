@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoomsController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomTypeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('rooms', RoomController::class);
-    Route::resource('reservations', RoomController::class);
+    Route::resource('room_types', RoomTypeController::class);
 
 });
 

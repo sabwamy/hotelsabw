@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'HOTEL-SABW') }}
+                    {{ config('', 'HOTEL-SABW') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                       <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
@@ -55,7 +55,8 @@
                                     Reservations
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="{{url('users') }}">Add Rooms</a>
+                                
+                              <a class="dropdown-item" href="{{url('rooms/create') }}">Add New Room</a>
                               <a class="dropdown-item" href="{{url('roles')}}">Manage Rooms</a>
                               <a class="dropdown-item" href="{{url('/payments/index')}}">View Rooms</a>
                               </div>
@@ -82,7 +83,8 @@
                                     Rooms
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="{{url('users') }}">Add Rooms</a>
+                                <a class="dropdown-item" href="{{url('room_types')}}"> Room type</a>
+                                <a class="dropdown-item" href="{{url('rooms/create') }}">Add New Room</a>
                               <a class="dropdown-item" href="{{url('roles')}}">Manage Rooms</a>
                               <a class="dropdown-item" href="{{url('/payments/index')}}">View Rooms</a>
                               </div>

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
     
 use App\Models\Room;
+use App\Models\Room_type;
 use Illuminate\Http\Request;
     
-class ProductController extends Controller
+class RoomController extends Controller
 { 
     /**
      * Display a listing of the resource.
@@ -26,8 +27,10 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $rooms = Room::all();
+        $room_types = Room_type::all();
         $rooms = Room::latest()->paginate(5);
-        return view('rooms.index',compact('products'))
+        return view('rooms.index',compact('rooms'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
     
@@ -38,7 +41,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('rooms.create');
+        $rooms = Room::all();
+        $room_types = Room_type::all();
+
+        return view('rooms.create', ['room_types' => $room_types]);
     }
     
     /**
@@ -49,16 +55,25 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'number' => 'required',
-            'name' => 'required',
-            'Status' => 'required',
+        $room_types = Room_type::all();
+        
+       //$rooms = Room::all();
+        $request->validate([
+            'room_type_id' => 'required',
+            'room_number' => 'required',
+            
+            
         ]);
-    
-        Product::create($request->all());
+        
+        $room = Room::create([
+            'room_type_id' => $request->input('room_type_id'),
+            'room_number' => $request->input('room_number'),
+            'status' => 'vacant'
+            ]);
     
         return redirect()->route('rooms.index')
                         ->with('success','Product created successfully.');
+                         
     }
     
     /**

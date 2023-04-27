@@ -1,64 +1,57 @@
 @extends('layouts.app')
 
-
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Add Room</h2>
+
+
+<link href="/css/style.css" rel="stylesheet">
+<div class="width=1200px">
+<div class ="container-fluid">
+
+<form method="POST" action="{{ route('rooms.store') }}">
+ @csrf
+
+
+        <div class="row justify-content-center" >
+            <div class="col-lg-5    ">
+            <label for="room_type_id">Room type:</label>
+               
+               <select class="form-select  @error('room_type_id') is-invalid @enderror" id="room_type_id" name="room_type_id" value="{{ old('room_type_id') }}" required autocomplete="room_type_id" autofocus>
+               @foreach ($room_types as $room_type) 
+               <option value ="{{ $room_type->id }}" >{{ $room_type->name }}</option>
+               @endforeach
+               </select>
+                                @error('room_type_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                               
+           </div>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
+
+    <div class="row justify-content-center" >     
+            
+            <div class="col-lg-5 ">
+        
+            <label for="room_number">Room Number:</label>
+               <input type="text" class="form-control  @error('room_number') is-invalid @enderror" id="room_number" placeholder="Enter Room Number" name="room_number" value="{{ old('room_number') }}" required autocomplete="room_number" autofocus>
+
+                                @error('room_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
             </div>
-        </div>
-    </div>
 
+            </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+            
+            
+               
+               <button type="submit" class="btn btn-success" style="margin-left:360px; margin-top:10px; margin-bottom:10px; padding-right:30px;">Save</button>
+           </form>
 
-
-    <form action="{{ route('rooms.store') }}" method="POST">
-    	@csrf
-
-
-         <div class="row">
-
-         <div class="col-xs-12 col-sm-12 col-md-12">
-		        <div class="form-group">
-		            <strong>Number:</strong>
-		            <input type="text" name="number" class="form-control" placeholder="number">
-		        </div>
-		    </div>
-
-		    <div class="col-xs-12 col-sm-12 col-md-12">
-		        <div class="form-group">
-		            <strong>Name:</strong>
-		            <input type="text" name="name" class="form-control" placeholder="Name">
-		        </div>
-		    </div>
-		    <div class="col-xs-12 col-sm-12 col-md-12">
-		        <div class="form-group">
-		            <strong>Status:</strong>
-		            <input type="text" name="status" class="form-control" placeholder="status">
-		        </div>
-		    </div>
-		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-		            <button type="submit" class="btn btn-primary">Submit</button>
-		    </div>
-		</div>
-
-
-    </form>
-
-
+</div>
+</div>
 
 @endsection
